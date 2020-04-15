@@ -89,8 +89,7 @@ class Solution {
         for char in s {
             if char == "(" || char == "[" || char == "{" {
                 newStr.append(char)
-            }
-            if (char == ")" && newStr.last == "(") ||
+            } else if (char == ")" && newStr.last == "(") ||
                 (char == "]" && newStr.last == "[") ||
                 (char == "}" && newStr.last == "{") {
                 newStr = String(newStr.dropLast())
