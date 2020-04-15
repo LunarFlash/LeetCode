@@ -84,7 +84,6 @@ class Solution {
     }
 
     func isValid(_ s: String) -> Bool {
-        if s.count % 2 != 0 || s.first == "]" || s.first ==  ")" || s.first == "}" { return false }
         var newStr = ""
         for char in s {
             if char == "(" || char == "[" || char == "{" {
@@ -93,6 +92,8 @@ class Solution {
                 (char == "]" && newStr.last == "[") ||
                 (char == "}" && newStr.last == "{") {
                 newStr = String(newStr.dropLast())
+            } else {
+                return false
             }
         }
         return newStr.isEmpty
