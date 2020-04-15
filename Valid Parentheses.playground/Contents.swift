@@ -66,23 +66,37 @@ extension Stack: CustomStringConvertible {
 }
 
 class Solution {
-    func isValid(_ s: String) -> Bool {
+    func isValid2(_ s: String) -> Bool {
         if s.count % 2 != 0 || s.first == "]" || s.first ==  ")" || s.first == "}" { return false }
         if s.count == 0 { return true }
         var array = Array(s)
-        //print("string:", s)
         // process string try to find match
         for (i, char) in array.enumerated() {
             guard i + 1 < array.count else { return false }
             let next = array[i + 1]
             if (char == "(" && next == ")") || (char == "[" && next == "]") || (char == "{" && next == "}") {
-                //print("at i:\(i) matched \(char)\(next)")
                 array.remove(at: i + 1)
                 array.remove(at: i)
                 return isValid(String(array))
             }
         }
         return false
+    }
+
+    func isValid(_ s: String) -> Bool {
+        if s.count % 2 != 0 || s.first == "]" || s.first ==  ")" || s.first == "}" { return false }
+        var newStr = ""
+        for char in s {
+            if char == "(" || char == "[" || char == "{" {
+                newStr.append(char)
+            }
+            if (char == ")" && newStr.last == "(") ||
+                (char == "]" && newStr.last == "[") ||
+                (char == "}" && newStr.last == "{") {
+                newStr = String(newStr.dropLast())
+            }
+        }
+        return newStr.isEmpty
     }
 }
 
