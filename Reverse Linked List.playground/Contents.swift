@@ -40,10 +40,19 @@ class Solution {
             next.next = newHead
             newHead = next
         }
-        head?.next = nil
         return newHead
     }
 
+    func reverseListRecursive(_ head: ListNode?) -> ListNode? {
+        // exit conditions
+        if head == nil || head?.next == nil {
+            return head
+        }
+        let prev = reverseListRecursive(head?.next) // walk backwards from exit condition
+        head?.next?.next = head
+        head?.next = nil
+        return prev
+    }
 }
 
 /// Setup test
@@ -59,7 +68,7 @@ let node5 = ListNode(5)
 node4.next = node5
 
 let solution = Solution()
-let newHead = solution.reverseList(head)
+let newHead = solution.reverseListRecursive(head)
 printList(head: newHead)
 
 
