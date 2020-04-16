@@ -39,7 +39,7 @@ struct Stack<Element> {
         array.append(element)
     }
     @discardableResult
-    mutating func pop(_ element: Element) -> Element? {
+    mutating func pop() -> Element? {
         return array.popLast()
     }
     @discardableResult
@@ -84,19 +84,19 @@ class Solution {
     }
 
     func isValid(_ s: String) -> Bool {
-        var newStr = ""
+        var stack = Stack<Character>()
         for char in s {
             if char == "(" || char == "[" || char == "{" {
-                newStr.append(char)
-            } else if (char == ")" && newStr.last == "(") ||
-                (char == "]" && newStr.last == "[") ||
-                (char == "}" && newStr.last == "{") {
-                newStr = String(newStr.dropLast())
+                stack.push(char)
+            } else if (char == ")" && stack.peek() == "(") ||
+                (char == "]" && stack.peek() == "[") ||
+                (char == "}" && stack.peek() == "{") {
+                stack.pop()
             } else {
                 return false
             }
         }
-        return newStr.isEmpty
+        return stack.isEmpty
     }
 }
 
