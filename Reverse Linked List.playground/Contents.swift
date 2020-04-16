@@ -21,23 +21,32 @@ public class ListNode {
     }
 }
 
-class Solution {
-    // Recurisve
-    func reverseList(_ head: ListNode?) -> ListNode? {
-        var curr = head
-        // exist condition
-        if curr == nil {
-            return head
-        } else if curr?.next == nil {  // this should be the new head
-
-        } else {
-
-        }
+func printList(head: ListNode?) {
+    let curr = head
+    if curr == nil {
+        return
+    } else {
+        print("\(curr!.val)")
+        printList(head: curr?.next)
     }
-
-    // Iterative
 }
 
+class Solution {
+    // Iterative
+    func reverseList(_ head: ListNode?) -> ListNode? {
+        var newHead: ListNode? = head
+        while let next = head?.next {
+            head?.next = next.next
+            next.next = newHead
+            newHead = next
+        }
+        head?.next = nil
+        return newHead
+    }
+
+}
+
+/// Setup test
 let node1 = ListNode(1)
 let head = node1
 let node2 = ListNode(2)
@@ -50,4 +59,7 @@ let node5 = ListNode(5)
 node4.next = node5
 
 let solution = Solution()
-solution.reverseList(head)
+let newHead = solution.reverseList(head)
+printList(head: newHead)
+
+
