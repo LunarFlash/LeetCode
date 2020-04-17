@@ -2,6 +2,7 @@ import UIKit
 
 /**
  [Reverse a singly linked list.](https://leetcode.com/problems/reverse-linked-list/)
+ [Youtube explaination](https://youtu.be/O0By4Zq0OFc?t=583)
 
  Example:
 
@@ -31,6 +32,14 @@ func printList(head: ListNode?) {
     }
 }
 
+func description (head: ListNode?, str: String = "") -> String? {
+    if head == nil {
+        return str
+    } else {
+        return description(head: head?.next, str: str + "\(head!.val)" + "->")
+    }
+}
+
 class Solution {
     // Iterative
     func reverseList(_ head: ListNode?) -> ListNode? {
@@ -48,10 +57,13 @@ class Solution {
         if head == nil || head?.next == nil {
             return head
         }
-        let prev = reverseListRecursive(head?.next) // walk backwards from exit condition
+        // walk backwards from exit condition, assuming the list head is processed
+        let reversedListHead = reverseListRecursive(head?.next)
+        print("current head:\(head!.val) revsersedLst:\(description(head: reversedListHead))")
         head?.next?.next = head
         head?.next = nil
-        return prev
+        print("reversed list head: \(reversedListHead?.val)")
+        return reversedListHead
     }
 }
 
@@ -69,6 +81,6 @@ node4.next = node5
 
 let solution = Solution()
 let newHead = solution.reverseListRecursive(head)
-printList(head: newHead)
+print("result: \(description(head: newHead))")
 
 
