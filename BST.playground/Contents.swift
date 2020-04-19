@@ -245,4 +245,3 @@ tree.traverseInOrder { (value) in print(value) }
 print("post order")
 tree.traversePostOrder { (value) in print(value) }
 tree.toArray()
-
