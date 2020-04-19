@@ -76,6 +76,8 @@ class DoublyLinkedList<T: Equatable> {
         tail = head
         head = tempTail
     }
+
+    // TODO: Recursive
 }
 
 extension DoublyLinkedList: CustomStringConvertible {
