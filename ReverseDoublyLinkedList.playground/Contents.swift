@@ -76,8 +76,6 @@ class DoublyLinkedList<T: Equatable> {
         tail = head
         head = tempTail
     }
-
-    // TODO: Recursive
 }
 
 extension DoublyLinkedList: CustomStringConvertible {
@@ -102,5 +100,5 @@ linkedList.append(3)
 linkedList.append(4)
 linkedList.append(5)
 print(linkedList)
-linkedList.reverse()
+linkedList.reverseRecursive(curr: linkedList.head)
 print(linkedList)
