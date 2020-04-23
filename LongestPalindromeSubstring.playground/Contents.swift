@@ -17,18 +17,18 @@ import UIKit
 class Solution {
     func longestPalindrome(_ s: String) -> String {
         if s.count <= 1 { return s }
-        var str = Array(s)
+        let str = Array(s)
         var longest = String(str[0])
         var curr = 0
         while curr < str.count {
-            if  curr - 1 >= 0, curr + 1 < str.count, str[curr - 1] == str[curr + 1] {
-                let solution = expand(str: &str, left: curr - 1, right: curr + 1)
+            if  curr - 1 >= 0, curr + 1 < str.count, str[curr - 1] == str[curr + 1] { // odd
+                let solution = expand(str: str, left: curr - 1, right: curr + 1)
                 if solution.count > longest.count {
                     longest = solution
                 }
             }
-            if curr + 1 < str.count, str[curr] == str[curr + 1] { //  found 2 char even palindrome such as "aa"
-                let solution = expand(str: &str, left: curr, right: curr + 1)
+            if curr + 1 < str.count, str[curr] == str[curr + 1] { // even
+                let solution = expand(str: str, left: curr, right: curr + 1)
                 if solution.count > longest.count {
                     longest = solution
                 }
@@ -37,7 +37,7 @@ class Solution {
         }
         return longest
     }
-    private func expand(str: inout [Character], left: Int, right: Int) -> String {
+    private func expand(str: [Character], left: Int, right: Int) -> String {
         var steps = 0
         while left - (steps + 1) >= 0, right + (steps + 1) < str.count, str[left - (steps + 1)] == str[right + (steps + 1)] {
             steps += 1
