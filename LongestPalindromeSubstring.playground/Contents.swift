@@ -18,31 +18,29 @@ class Solution {
     func longestPalindrome(_ s: String) -> String {
         if s.count <= 1 { return s }
         let str = Array(s)
-        var longest = String(str[0])
-        var curr = 0
-        while curr < str.count {
-            if  curr - 1 >= 0, curr + 1 < str.count, str[curr - 1] == str[curr + 1] { // odd
-                let solution = expand(str: str, left: curr - 1, right: curr + 1)
-                if solution.count > longest.count {
-                    longest = solution
-                }
+        var longestStart: Int = 0
+        var longestLength: Int = 0
+
+        for i in 0..<str.count - 1 {
+            if  i - 1 >= 0, i + 1 < str.count, str[i - 1] == str[i + 1] { // odd
+                expand(str: str, left: i - 1, right: i + 1, start: &longestStart, longestLength: &longestLength)
             }
-            if curr + 1 < str.count, str[curr] == str[curr + 1] { // even
-                let solution = expand(str: str, left: curr, right: curr + 1)
-                if solution.count > longest.count {
-                    longest = solution
-                }
+            if i + 1 < str.count, str[i] == str[i + 1] { // even
+                expand(str: str, left: i, right: i + 1, start: &longestStart, longestLength: &longestLength)
             }
-            curr += 1
         }
-        return longest
+        return String(str[longestStart...(longestStart + longestLength)])
     }
-    private func expand(str: [Character], left: Int, right: Int) -> String {
+    private func expand(str: [Character], left: Int, right: Int, start: inout Int, longestLength: inout Int) {
         var steps = 0
         while left - (steps + 1) >= 0, right + (steps + 1) < str.count, str[left - (steps + 1)] == str[right + (steps + 1)] {
             steps += 1
         }
-        return String(str[(left - steps)...(right + steps)])
+        let currentLength = (right + steps) - (left - steps)
+        if currentLength > longestLength {
+            start = left - steps
+            longestLength = currentLength
+        }
     }
 }
 
