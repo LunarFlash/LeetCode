@@ -1,5 +1,6 @@
 /**
  [Binary Search](https://learnappmaking.com/binary-search-swift-how-to/)
+ - O(n log n)
  */
 import UIKit
 
