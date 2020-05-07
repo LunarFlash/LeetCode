@@ -53,5 +53,7 @@ let fizzBuzz: (Int) -> String = { i in
     }
 }
 
-fizzBuzz3()
-Array(1...100).map(fizzBuzz).joined(separator: ",")
+//fizzBuzz3()
+print(Array(1...100).map(fizzBuzz).joined(separator: ","))
+
+
