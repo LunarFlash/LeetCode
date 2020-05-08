@@ -7,16 +7,18 @@ class Solution {
     func threeSum(_ nums: [Int]) -> [[Int]] {
         if nums.count < 3 { return [[Int]]() }
         var solutions = Set<[Int]>()
+        var seen = Set<[Int]>()
+        var dups = Set<Int>()
         for (i, num) in nums.enumerated() {
             var nums = nums
-            nums.remove(at: i)
-            //print("for num:\(num) analyzing \(nums)")
-            while let twoSum = twoSum(nums, -num) {
-                let solution = [num, nums[twoSum[0]], nums[twoSum[1]]].sorted()
-                solutions.insert(solution)
-                nums.remove(at: twoSum[0])
-                nums.remove(at: twoSum[1])
-            }
+            //nums.remove(at: i)
+            dups.insert(<#T##newMember: Int##Int#>)
+                for j in (i + 1)..<nums.count {
+                }
+
+
+
+
         }
         return Array(solutions)
     }

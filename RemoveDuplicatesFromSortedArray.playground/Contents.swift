@@ -44,11 +44,12 @@ class Solution {
         if nums.isEmpty { return 0 }
         var i = 0
         for j in 1..<nums.count {
-            print("i: \(i),\(nums[1]) j: \(j),\(nums[j])")
+            print("nums[\(i)]:\(nums[i]) nums[\(j)]:\(nums[j])")
             if nums[i] != nums[j] {
                 i += 1
+                print("about to swap: nums[\(i)]:\(nums[i]), nums[\(j)]:\(nums[j])")
                 nums[i] = nums[j]
-                print("^ swap - nums: \(nums)")
+                print("after swap - nums: \(nums)\n")
             }
         }
         return i + 1
@@ -56,10 +57,11 @@ class Solution {
 }
 
 let s = Solution()
-//var nums = [0,0,1,1,1,2,2,3,3,4]
 var nums = [1,1,2,3,4,4,4]
 let len = s.removeDuplicates(&nums)
 print("---solution:")
+var solution = [Int]()
 for i in 0..<len {
-    print(nums[i])
+    solution.append(nums[i])
 }
+print(solution)
